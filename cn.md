@@ -1,3 +1,16 @@
+我正在使用 [oxc](https://github.com/oxc-project/oxc) 来解析并修改 JS 代码。
+
+```js
+const b = require('b.js')
+```
+
+如上所示，我想给模块名(`b.js`)加上一个前缀，这个前缀是动态的。
+
+下面是我的代码，代码仓库见[这里](https://github.com/ParadeTo/rs-problem)。现在的问题是 `new_name` 会在函数执行完后销毁，但是 `Atom::from` 声明了一个生命周期(`'a`)，所以编译器报错：`new_name` does not live long enough.
+
+怎么解决这个问题呀？跪求大佬指点。
+
+```rs
 #![allow(clippy::print_stdout)]
 use itertools::Itertools;
 use oxc_allocator::Allocator;
@@ -90,3 +103,4 @@ fn main() -> std::io::Result<()> {
 
     Ok(())
 }
+```

@@ -1,3 +1,18 @@
+I am using [oxc](https://github.com/oxc-project/oxc) to parse and modify JS code.
+
+```js
+const b = require('b.js')
+```
+
+Take the code above as an example. I want to add a prefix string to the module name(`b.js`), and the prefix is dynamic.
+
+Here is my code as blow, the repository is [here](https://github.com/ParadeTo/rs-problem). The problem is that the `new_name` will be destroyed after function was called, but `Atom::from` declare a lift cycle(`'a`).
+
+So the compiler report the error: `new_name` does not live long enough.
+
+How to resolve this problem?
+
+```rs
 #![allow(clippy::print_stdout)]
 use itertools::Itertools;
 use oxc_allocator::Allocator;
@@ -90,3 +105,4 @@ fn main() -> std::io::Result<()> {
 
     Ok(())
 }
+```
